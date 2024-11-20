@@ -1,0 +1,6 @@
+/node_modules
+/.parcel-cache
+/be-dist
+/fe-dist
+/be-src/devenv.ts
+/.env
