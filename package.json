@@ -8,7 +8,9 @@
     "build:fe": "parcel build --dist-dir ./fe-dist",
     "build:be": "tsc",
     "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
-    "sync:force": "ts-node ./be-src/db/sync.ts"
+    "sync:force": "ts-node ./be-src/db/sync.ts",
+    "build": "npm run build:front && npm run build:back",
+    "start": "node ./be-dist/index.js"
   },
   "author": "",
   "license": "ISC",
