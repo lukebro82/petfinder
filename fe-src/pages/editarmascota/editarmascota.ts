@@ -46,9 +46,9 @@ export class Reportedit extends HTMLElement {
                    </form>
                       
              <div class="editarrepot-buttons">
-                  <el-button id="button1" button-color="#5A8FEC" class="form-button">Guardar</el-button>
-                  <el-button id="button2"   button-color="#EB6372" class="form-button">Eliminar</el-button> 
-                  <el-button id="button3" button-color="#4A5553" class="form-button">Cancelar</el-button>   
+                  <el-button id="buttonguardar" button-color="#5A8FEC" class="form-button">Guardar</el-button>
+                  <el-button id="buttonDelete"   button-color="#EB6372" class="form-button">Eliminar</el-button> 
+                  <el-button id="buttoncancel" button-color="#4A5553" class="form-button">Cancelar</el-button>   
              </div>
          
                
@@ -204,14 +204,14 @@ export class Reportedit extends HTMLElement {
       }
     });
 
-    const button1 = document.getElementById("button1");
-    button1?.addEventListener("click", (e) => {
+    const buttonguardar = document.getElementById("buttonguardar");
+    buttonguardar?.addEventListener("click", (e) => {
       e.preventDefault();
       if (formName) {
         formName.requestSubmit();
       }
     });
-    const buttonDelete = document.getElementById("button2");
+    const buttonDelete = document.getElementById("buttonDelete");
     buttonDelete?.addEventListener("click", (e) => {
       const petToDeleted = state.data.miPetEdit;
       const id = petToDeleted["id"];
@@ -221,8 +221,8 @@ export class Reportedit extends HTMLElement {
       });
     });
 
-    const buttonCancelar = document.getElementById("button3");
-    buttonCancelar?.addEventListener("click", () => {
+    const buttonCancel = document.getElementById("buttoncancel");
+    buttonCancel?.addEventListener("click", () => {
       Router.go("/mascotas-reportadas");
     });
   }

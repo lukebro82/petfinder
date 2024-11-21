@@ -13,3 +13,13 @@ Pet.init(
   },
   { sequelize, modelName: "Pet" }
 );
+
+export interface PetUpdateData {
+  name: string;
+  id: string;
+  photoURL: string;
+  last_lat: string;
+  last_lng: string;
+  lastLocation: string;
+  UserId: string;
+}

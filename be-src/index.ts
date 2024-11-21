@@ -23,6 +23,7 @@ import { patchUser } from "./controllers/usercontroller";
 
 import * as cors from "cors";
 import { sendMail } from "./controllers/emailcontroller";
+import { PetUpdateData } from "./models/pet";
 
 const app = express();
 const port = 3000;
@@ -138,7 +139,7 @@ app.patch("/pet", authMiddleware, async (req, res) => {
 
   const photoURL = await cloudinaryPetPhoto(photo);
 
-  const pet = {
+  const pet: PetUpdateData = {
     id,
     name,
     photoURL: photoURL,
@@ -203,6 +204,7 @@ app.post("/mail", async (req, res) => {
 // });
 
 const staticDirPath = path.resolve(__dirname, "../fe-dist");
+// console.log(staticDirPath);
 
 app.use(express.static(staticDirPath));
 

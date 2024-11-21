@@ -2,8 +2,8 @@ const apiBaseUrl = process.env.API_BASE_URL;
 
 const state = {
   data: {
-    lat: NaN,
-    lng: NaN,
+    lat: 0,
+    lng: 0,
     userId: "",
     userEmail: "",
     token: "",
@@ -93,6 +93,17 @@ const state = {
     localStorage.removeItem("userEmail");
 
     const currentState = this.getState();
+    currentState.data.token = "";
+    currentState.data.userEmail = "";
+    currentState.data.userId = "";
+    currentState.data.misPets = [];
+    currentState.data.petCerca = [];
+    currentState.data.miPetEdit.id = "";
+    currentState.data.miPetEdit.location = "";
+    currentState.data.miPetEdit.name = "";
+    currentState.data.miPetEdit.lat = "";
+    currentState.data.miPetEdit.lng = "";
+    currentState.data.miPetEdit.photo = "";
     currentState.token = "";
     currentState.userEmail = "";
     this.setState(currentState);

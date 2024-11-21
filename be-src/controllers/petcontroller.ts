@@ -1,8 +1,9 @@
 import { Pet } from "../models/models";
 import { cloudinary } from "../lib/cloudinary";
 import { extractPublicId } from "cloudinary-build-url";
-import { index } from "../lib/algolia";
+import { algolia } from "../lib/algolia";
 import { Op, where } from "sequelize";
+import { PetUpdateData } from "../models/pet";
 
 export async function createPet(
   name,
@@ -45,7 +46,7 @@ export async function cloudinaryPetPhoto(updateData) {
 }
 
 export async function createAlgolia(id, lat, lng) {
-  const petAlgolia = index.saveObject({
+  const petAlgolia = algolia.saveObject({
     objectID: id,
 
     _geoloc: {
@@ -58,7 +59,7 @@ export async function createAlgolia(id, lat, lng) {
 }
 
 export async function searchAlgolia(lat, lng) {
-  const results = await index.search("", {
+  const results = await algolia.search("", {
     aroundLatLng: `${lat}, ${lng}`,
     aroundRadius: 1500,
   });
@@ -77,40 +78,29 @@ export async function searchAlgolia(lat, lng) {
 }
 
 export async function searchPetByUserId(id) {
-  const results = await Pet.findAll({ where: { UserId: id } });
-
-  return results;
+  return await Pet.findAll({ where: { UserId: id } });
 }
 
 export async function searchPetById(id) {
-  const results = await Pet.findByPk(id);
-
-  return results;
+  return await Pet.findByPk(id);
 }
 
 export async function searchAlgoliaPet(objectID) {
-  const results = await index.getObject(objectID);
-
-  return results;
+  return await algolia.getObject(objectID);
 }
 
 export async function searchCloudinaryPet(photoURL) {
-  const publicId = extractPublicId(photoURL);
-  return publicId;
+  return await extractPublicId(photoURL);
 }
 
 export async function deletePet(id, cloudyData, objectID) {
   try {
-    // Buscar la mascota en la db
     const petDb = await Pet.findByPk(id);
 
-    // Eliminar en Cloudinary
     const cludyPhotoResult = await cloudinary.api.delete_resources(cloudyData);
 
-    // Eliminar  en Algolia
-    const algoliaResult = await index.deleteObject(objectID);
+    const algoliaResult = await algolia.deleteObject(objectID);
 
-    // Si se encontró la mascota, eliminarla
     if (petDb) {
       await petDb.destroy();
       console.log(`Mascota con ID ${id} eliminada exitosamente.`);
@@ -122,7 +112,7 @@ export async function deletePet(id, cloudyData, objectID) {
   }
 }
 
-export async function patchPet(pet) {
+export async function patchPet(pet: PetUpdateData) {
   const petDb = await Pet.findByPk(pet.id);
   const petAlgolia = await searchAlgoliaPet(pet.id);
 
@@ -138,7 +128,7 @@ export async function patchPet(pet) {
       { where: { id: pet.UserId } }
     );
 
-    await index.partialUpdateObject({
+    await algolia.partialUpdateObject({
       objectID: petAlgolia.objectID,
       _geoloc: { lat: pet.last_lat, lng: pet.last_lng },
     });

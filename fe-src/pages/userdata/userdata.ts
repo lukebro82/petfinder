@@ -95,23 +95,9 @@ export class Userdata extends HTMLElement {
 
     logOut?.addEventListener("click", () => {
       state.logout();
-      state.data.token = "";
-      state.data.userEmail = "";
-      state.data.userId = "";
-      state.data.misPets = [];
-      state.data.petCerca = [];
-      state.data.miPetEdit.id = "";
-      state.data.miPetEdit.location = "";
-      state.data.miPetEdit.name = "";
-      state.data.miPetEdit.lat = "";
-      state.data.miPetEdit.lng = "";
-      state.data.miPetEdit.photo = "";
 
       Router.go("/");
-
-      setTimeout(() => {
-        location.reload();
-      }, 100);
+      location.reload();
     });
   }
 }

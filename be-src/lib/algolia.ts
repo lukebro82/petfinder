@@ -5,6 +5,6 @@ import algoliasearch from "algoliasearch";
 // import algoliasearch from 'algoliasearch/lite';
 
 const client = algoliasearch("RKGFA8SB09", process.env.ALGOLIASEARCH);
-const index = client.initIndex("pets");
+const algolia = client.initIndex("pets");
 
-export { index };
+export { algolia };
