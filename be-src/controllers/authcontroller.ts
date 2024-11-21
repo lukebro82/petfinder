@@ -1,5 +1,6 @@
 import { User, Auth } from "../models/models";
 import * as crypto from "crypto";
+//@ts-ignore
 import * as jwt from "jsonWebToken";
 
 const secretWord = process.env.SECRET;

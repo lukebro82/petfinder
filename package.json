@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
     "nodemon": "^3.1.4",
     "parcel": "^2.12.0",
     "process": "^0.11.10"
