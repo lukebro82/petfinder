@@ -1,6 +1,5 @@
 import { Pet } from "../models/models";
 import { cloudinary } from "../lib/cloudinary";
-import { extractPublicId } from "cloudinary-build-url";
 import { algolia } from "../lib/algolia";
 import { Op, where } from "sequelize";
 import { PetUpdateData } from "../models/pet";
@@ -90,9 +89,8 @@ export async function searchAlgoliaPet(objectID) {
 }
 
 export async function searchCloudinaryPet(photoURL) {
-  return await extractPublicId(photoURL);
+  return photoURL.indexOf("upload/") + "upload/".length;
 }
-
 export async function deletePet(id, cloudyData, objectID) {
   try {
     const petDb = await Pet.findByPk(id);
