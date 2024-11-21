@@ -9,7 +9,7 @@
     "build:be": "tsc",
     "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
     "sync:force": "ts-node ./be-src/db/sync.ts",
-    "build": "npm run build:front && npm run build:back",
+    "build": "npm run build:fe && npm run build:be",
     "start": "node ./be-dist/index.js"
   },
   "author": "",
