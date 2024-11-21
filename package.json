@@ -20,6 +20,7 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@mapbox/mapbox-gl-geocoder": "^5.0.3",
     "@mapbox/mapbox-sdk": "^0.15.6",
     "@mapbox/search-js-web": "^1.0.0-beta.22",
