@@ -73,7 +73,6 @@ const state = {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.token) {
           // Actualizamos el estado
           const currentState = this.getState();
