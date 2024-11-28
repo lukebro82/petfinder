@@ -41,10 +41,8 @@ const state = {
     const savedEmail = localStorage.getItem("userEmail");
 
     if (savedToken && savedEmail) {
-      const currentState = this.getState();
-      currentState.token = savedToken;
-      currentState.userEmail = savedEmail;
-      this.setState(currentState);
+      this.data.token = savedToken;
+      this.data.userEmail = savedEmail;
     }
   },
 
@@ -71,8 +69,11 @@ const state = {
         password,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
+        console.log(data);
         if (data.token) {
           // Actualizamos el estado
           const currentState = this.getState();
@@ -88,25 +89,20 @@ const state = {
       });
   },
 
-  logout() {
+  async logout() {
+    this.data.token = "";
+    this.data.userEmail = "";
+    this.data.userId = "";
+    this.data.misPets = [];
+    this.data.petCerca = [];
+    this.data.miPetEdit.id = "";
+    this.data.miPetEdit.location = "";
+    this.data.miPetEdit.name = "";
+    this.data.miPetEdit.lat = "";
+    this.data.miPetEdit.lng = "";
+    this.data.miPetEdit.photo = "";
     localStorage.removeItem("token");
     localStorage.removeItem("userEmail");
-
-    const currentState = this.getState();
-    currentState.data.token = "";
-    currentState.data.userEmail = "";
-    currentState.data.userId = "";
-    currentState.data.misPets = [];
-    currentState.data.petCerca = [];
-    currentState.data.miPetEdit.id = "";
-    currentState.data.miPetEdit.location = "";
-    currentState.data.miPetEdit.name = "";
-    currentState.data.miPetEdit.lat = "";
-    currentState.data.miPetEdit.lng = "";
-    currentState.data.miPetEdit.photo = "";
-    currentState.token = "";
-    currentState.userEmail = "";
-    this.setState(currentState);
   },
 
   async petsCerca(last_lat, last_lng) {

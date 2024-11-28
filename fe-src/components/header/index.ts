@@ -131,11 +131,12 @@ class HeaderEl extends HTMLElement {
     xIconButton?.addEventListener("click", () => {
       burgerMenu?.classList.replace("burger-menu-open", "burger-menu");
     });
-    logOut?.addEventListener("click", () => {
-      state.logout();
+    logOut?.addEventListener("click", async () => {
+      state.logout().then(() => {
+        Router.go("/");
+        location.reload();
+      });
 
-      Router.go("/");
-      location.reload();
       // setTimeout(() => {
 
       // }, 100);

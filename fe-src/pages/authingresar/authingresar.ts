@@ -108,6 +108,7 @@ export class Authingresar extends HTMLElement {
 
     const formIngresar = document.querySelector(".form-ingresar");
     formIngresar?.addEventListener("submit", (e: any) => {
+      e.preventDefault();
       const email = e.target.email.value;
       const password = e.target.password.value;
 
