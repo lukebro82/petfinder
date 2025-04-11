@@ -61,36 +61,14 @@ export async function createToken(email: string, password: string) {
   }
 }
 
-// export function authMiddleware(req, res, next) {
-//   const token = req.headers.authorization.split(" ")[1];
-//   try {
-//     const data = jwt.verify(token, secretWord);
-//     req._user = data;
-//     next();
-//   } catch (error) {
-//     res.status(401).json({ error: "no autorizado" });
-//   }
-// }
-
 export function authMiddleware(req, res, next) {
-  // Permitir solicitudes OPTIONS sin autenticación
-  if (req.method === "OPTIONS") {
-    return next();
-  }
-
-  // Verificar el header Authorization
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "No autorizado" });
-  }
-
-  const token = authHeader.split(" ")[1];
+  const token = req.headers.authorization.split(" ")[1];
   try {
-    const data = jwt.verify(token, secretWord); // Usa variable de entorno
+    const data = jwt.verify(token, secretWord);
     req._user = data;
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Token inválido" });
+    res.status(401).json({ error: "no autorizado" });
   }
 }
 

@@ -28,20 +28,20 @@ import { PetUpdateData } from "./models/pet";
 const app = express();
 const port = 3000;
 app.use(express.json({ limit: "50mb" }));
-// app.use(cors());
+app.use(cors());
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://petfinder-react-front.onrender.com",
-      "https://pet-finder-osj6.onrender.com", // URL del frontend en producción, si aplica
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, // Si planeas usar cookies o sesiones
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://petfinder-react-front.onrender.com",
+//       "https://pet-finder-osj6.onrender.com", // URL del frontend en producción, si aplica
+//     ],
+//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true, // Si planeas usar cookies o sesiones
+//   })
+// );
 // crear usuario nuevo signup
 app.post("/auth", async (req, res) => {
   const { name, location, email, password } = req.body;
